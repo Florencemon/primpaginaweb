@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>Document</title>
+
+  <link rel="stylesheet" href="css/fetch.css">
+</head>
+
+<body>
+
+
+  <!-- personajes --->
+  <section id="personajes">
+
+
+  </section>
+
+
+  <script>
+    const insertCharacters = function (results) {
+      //contenedor de personajes
+      const container = document.getElementById('personajes')
+      for (let characters of results) {
+        container.innerHTML += `
+          <div class="characters">
+             <h2>${characters.name}</h2>
+              <div class="info">
+                <p>Nombre completo: ${characters.name}</p>
+                <p>Edad: ${characters.age}</p>
+                <p>Sexo:${characters.sex}</p>
+                <p>Grado: ${characters.grade}</p>
+                <p>Religión: ${characters.religion}</p>
+                <p>Ocupación: ${characters.occupation}</p>
+
+                      </div>
+                      </div>`
+      }
+    }
+
+    fetch('https://spapi.dev/api/characters/').then(function (response) {
+      return response.json();
+    }).then(function (response) {
+
+      insertCharacters(response.data)
+    })
+  </script>
+</body>
+
+</html>
